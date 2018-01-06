@@ -1,0 +1,10 @@
+Package: FinalAssignmentR
+Type: Package
+Title: Final Assignment R
+Version: 0.1.0
+Author: Ferrie Heskes
+Maintainer: Ferrie Heskes <ferrie.heskes@casema.nl>
+Description: In this assigment EarthQuake data is used. Several functions are written to cleanup the dataset and to use the ggplot2 library to create geoms to visualize the earthquakes in several ways.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
