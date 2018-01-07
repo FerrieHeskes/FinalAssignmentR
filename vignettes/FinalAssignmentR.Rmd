@@ -1,0 +1,75 @@
+---
+title: "Mastering Software Development in R: FinalAssignmentR"
+author: "Ferrie Heskes"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Introduction
+This package is created as a final assignment for the course Mastering Software Development in R. The package contains several functions to save the data within a dataframe and clean the data and to visualize the data geometrics and maps are used. 
+
+The data is extracted from the [NOAA site](https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1) and contains data of earthquakes.
+
+
+## Functions to clean and save the data
+
+The data was downloaded from [NOAA site](https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1) and saved in tsv format (delimited by tabs). The function `eq_get_data` is used to read the downloaded data and save it into a dataframe using the regular r function `read.delim`:
+
+```r
+rawdata <- eq_get_data("../data/signif.txt.tsv")
+```
+
+On this dataset some cleanup actions can be executed via the function `eq_clean_data`. Within this function the columns ´LATITUDE´ and ´LONGITUDE´ are converted to a numeric format and a field DATE is created.
+
+```r
+data <- eq_clean_data(rawdata)
+```
+
+Within the function `eq_clean_data` an explicit call is made to the function `eq_location_clean`. The function `eq_location_clean` extracts the location where the earthquake took place. It is called as follows:
+
+```r
+eq_location_clean(data$LOCATION_NAME)
+```
+
+With the above functions the data is ready to be used to be visualized.
+
+## Visualize the data
+
+There are two ways the earthquake data will be plotted. The first way is using geometrics using the `ggplot2` package and the second way is via mapping using the `leaflet` package.
+
+For the visualization using geometrics geometry `geom_timeline` a timeline is drawn on a `grid` and points are plotted on the timeline. The points represent the earthquakes. Via the aesthetics specifics, like colour and size, to the points can be appointed. In the case underneath the colour of the points gives insight of the number of death and the size of the points the magnitude of a specific earthquake.  
+
+Additionally with the `geom_timeline_label()` a vertical line and a label can be appointed to the points on the timeline represeneting the number `n_max` of largest earthquakes in magnitude to identify an earthquake. With the `theme_timeline()` visualization is improved to blank out certain specifics of the `grid` and to position the legend.
+
+The call to show the earthquakes on a timeline for certain countries for a certain period with location text of the 5 biggest earthquakes ever occured in a certain period in that country is as follows: 
+
+```r
+data %>% 
+  dplyr::filter(COUNTRY %in% c("CHINA", "USA") & lubridate::year(DATE) >= 2000) %>%
+  ggplot2::ggplot(aes(x = DATE, y = COUNTRY, colour = TOTAL_DEATHS, size = EQ_PRIMARY)) +
+  geom_timeline() +
+  geom_timeline_label(aes(label = LOCATION_NAME), n_max = 5) +
+  theme_timeline() +
+  labs(size = "Richter scale value", colour = "# deaths")
+```
+
+The second way to visualize the earthquakes is by using maps using the `leaflet` package. With the function `eq_map` a map and a point for each earthquake is plotted. Here the size of the point is used to show the magnitude of the earthquake and the colour of the point is used to show the number of deaths involved. Additionally a popup window is added where text can be appointed to with additional information. The call to show a map of a specific country in a certain period with additional information about the date is:
+
+```r
+data %>%
+  dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(DATE) >= 2000) %>%
+  eq_map(annot_col = "DATE")
+```
+
+Using the function `eq_create_label` the popup window can be 'improved'. Here HTML code is used to show within the popup window. The HTML code consists of information about the date, location, magnitude and number of deaths concerning an earthquake. When information is not available it is not shown. The call to show the same map as the example above but extended information is as follows: 
+
+```r
+data %>%
+  dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(DATE) >= 2000) %>% 
+  dplyr::mutate(popup_text = eq_create_label(.)) %>% 
+  eq_map(annot_col = "popup_text")
+```

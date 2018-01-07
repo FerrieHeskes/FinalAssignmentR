@@ -8,7 +8,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' eq_get_data("data/signif.txt")
+#'
+#' eq_get_data("data/signif.txt.tsv")
 #' }
 #'
 #' @export
@@ -16,7 +17,7 @@
 eq_get_data <- function (datafile) {
 
   #Read the file delimited by tabs
-  read.delim(datafile,sep="\t")
+  read.delim(datafile,sep="\t",header = TRUE)
 
 }
 
@@ -29,7 +30,7 @@ eq_get_data <- function (datafile) {
 #' 2. Make a new dataitem DATE using the dataitems YEAR, MONTH and DAY from the dataframe
 #' 3. Cleanup the locationname via function \code{eq_clean_data} by deleting all text following a ':'
 #'
-#' @param datafile The dataframe constructed by function 'eq_get_data'
+#' @param data The dataframe constructed by function 'eq_get_data'
 #'
 #' @return This function returns the cleanedup NOAA earthquake data in a dataframe
 #'
@@ -37,20 +38,21 @@ eq_get_data <- function (datafile) {
 #'
 #' @examples
 #' \dontrun{
-#' eq_clean_data(eq_get_data("data/signif.txt"))
+#' data <- readr::read_delim("data/signif.txt.tsv", delim = "\t")
+#' eq_clean_data(data)
 #' }
 #'
 #' @export
 #'
-eq_clean_data <- function (datafile) {
+eq_clean_data <- function (data) {
 
-  datafile$LATITUDE <- as.numeric(datafile$LATITUDE)
-  datafile$LONGITUDE <- as.numeric(datafile$LONGITUDE)
-  datafile$LOCATION_NAME <- eq_location_clean(as.character(datafile$LOCATION_NAME))
+  data$LATITUDE <- as.numeric(data$LATITUDE)
+  data$LONGITUDE <- as.numeric(data$LONGITUDE)
+  data$LOCATION_NAME <- eq_location_clean(as.character(data$LOCATION_NAME))
 
   #When year is before Christ (i.e. year lower than 0) the Date will no be set!
   #Set the date based on year
-  datafile <- datafile %>%
+  data <- data %>%
               dplyr::mutate(DATE = as.Date(paste0(YEAR,"-",MONTH,"-",DAY),"%Y-%m-%d"))
 }
 
@@ -68,7 +70,7 @@ eq_clean_data <- function (datafile) {
 #'
 #' @examples
 #' \dontrun{
-#' eq_clean_data(eq_get_data("data/signif.txt"))
+#' eq_clean_data(eq_get_data("data/signif.txt.tsv"))
 #' }
 #'
 #' @export

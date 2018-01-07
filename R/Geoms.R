@@ -1,6 +1,6 @@
-#' Geom of a timeline containing earthquaks
+#' Geom of a timeline containing earthquakes
 #'
-#' This geom plots a timeline showing earthquaks with the time it occured, the scaled size, the country and the number of casualties momentfunction uses the data file with fatal injuries in motor vehicle traffic crashes in the USA to summarizes the total number
+#' This geom plots a timeline showing earthquakes with the time it occured, the scaled size, the country and the number of casualties momentfunction uses the data file with fatal injuries in motor vehicle traffic crashes in the USA to summarizes the total number
 #'
 #' @importFrom ggplot2 aes draw_key_point Geom layer
 #' @importFrom grid gList gpar pointsGrob polylineGrob

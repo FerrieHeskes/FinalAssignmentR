@@ -13,7 +13,7 @@
 #' \dontrun{
 #' eq_map(data, annot_col = "DATE")
 #' }
-#' #' @export
+#' @export
 #'
 eq_map <- function(data, annot_col) {
 
