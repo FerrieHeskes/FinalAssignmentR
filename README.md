@@ -12,3 +12,5 @@ This is a package created for the final assignment for the Coursera course Maste
 The data used concerns earthquake data downloaded from the [NOAA site](https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1). 
 
 More information about the setup of the data cleaning and visualization can be found within the vignettes.
+
+[![Travis-CI Build Status](https://travis-ci.org/FerrieHeskes/FinalAssignmentR.svg?branch=master)](https://travis-ci.org/FerrieHeskes/FinalAssignmentR)
