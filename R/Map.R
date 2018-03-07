@@ -8,6 +8,7 @@
 #' @return A leaflet map with earthquakes and corresponding text.
 #'
 #' @importFrom leaflet leaflet addTiles addCircleMarkers
+#' @importFrom dplyr %>%
 #'
 #' @examples
 #' \dontrun{
@@ -17,10 +18,10 @@
 #'
 eq_map <- function(data, annot_col) {
 
-  leaflet::leaflet() %>%
-  leaflet::addTiles() %>%
-  leaflet::addCircleMarkers(radius = data$EQ_PRIMARY, weight = 1, lng = data$LONGITUDE, lat = data$LATITUDE, popup = data[[annot_col]])
-}
+	leaflet::leaflet() %>%
+	leaflet::addTiles() %>%
+	leaflet::addCircleMarkers(radius = data$EQ_PRIMARY, weight = 1, lng = data$LONGITUDE, lat = data$LATITUDE, popup = data[[annot_col]])
+ }
 
 #' eq_create_label
 #'

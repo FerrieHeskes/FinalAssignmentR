@@ -19,7 +19,7 @@ from https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1
 }
 \examples{
 \dontrun{
-eq_clean_data(eq_get_data("data/signif.txt.tsv"))
+eq_clean_data(eq_get_data("inst/extdata/signif.txt.tsv"))
 }
 
 }

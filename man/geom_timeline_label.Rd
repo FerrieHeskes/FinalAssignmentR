@@ -9,7 +9,23 @@ geom_timeline_label(mapping = NULL, data = NULL, stat = "identity",
   inherit.aes = TRUE, ...)
 }
 \arguments{
+\item{mapping}{The mapping}
+
+\item{data}{The data}
+
+\item{stat}{The stat}
+
+\item{position}{The position}
+
+\item{na.rm}{The na}
+
 \item{n_max}{The number of the largest earthquakes to be labelled}
+
+\item{show.legend}{The legend}
+
+\item{inherit.aes}{The aesthetics}
+
+\item{...}{Et all}
 }
 \description{
 This geom plots labels with a certain number of largest (by size) earthquake on a timeline.

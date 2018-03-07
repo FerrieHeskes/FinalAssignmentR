@@ -66,6 +66,14 @@ geom_timeline <- function(mapping = NULL, data = NULL, stat = "identity",
 #' The timeline is created by \code{geom_timeline}
 #'
 #' @param n_max The number of the largest earthquakes to be labelled
+#' @param mapping The mapping
+#' @param data The data
+#' @param stat The stat
+#' @param position  The position
+#' @param na.rm The na
+#' @param show.legend The legend
+#' @param inherit.aes The aesthetics
+#' @param ... Et all
 #'
 #' @importFrom ggplot2 draw_key_blank Geom layer
 #' @importFrom dplyr group_by top_n ungroup

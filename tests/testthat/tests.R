@@ -1,4 +1,5 @@
-rawdata <- eq_get_data("../../data/signif.txt.tsv")
+getwd()
+rawdata <- eq_get_data("inst/extdata/signif.txt.tsv")
 data <- eq_clean_data(rawdata)
 
 #Test cleaning  

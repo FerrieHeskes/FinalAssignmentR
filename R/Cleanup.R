@@ -6,10 +6,12 @@
 #'
 #' @return This function returns the input data in a dataframe table
 #'
+#' @importFrom utils read.delim
+#'
 #' @examples
 #' \dontrun{
 #'
-#' eq_get_data("data/signif.txt.tsv")
+#' eq_get_data("inst/extdata/signif.txt.tsv")
 #' }
 #'
 #' @export
@@ -34,11 +36,11 @@ eq_get_data <- function (datafile) {
 #'
 #' @return This function returns the cleanedup NOAA earthquake data in a dataframe
 #'
-#' @importFrom dplyr mutate
+#' @importFrom dplyr %>% mutate
 #'
 #' @examples
 #' \dontrun{
-#' data <- readr::read_delim("data/signif.txt.tsv", delim = "\t")
+#' data <- readr::read.delim("inst/extdata/signif.txt.tsv", delim = "\t")
 #' eq_clean_data(data)
 #' }
 #'
@@ -52,8 +54,7 @@ eq_clean_data <- function (data) {
 
   #When year is before Christ (i.e. year lower than 0) the Date will no be set!
   #Set the date based on year
-  data <- data %>%
-              dplyr::mutate(DATE = as.Date(paste0(YEAR,"-",MONTH,"-",DAY),"%Y-%m-%d"))
+  data <- data %>% dplyr::mutate(DATE = as.Date(paste0(data$YEAR,"-",data$MONTH,"-",data$DAY),"%Y-%m-%d"))
 }
 
 #' eq_location_clean
@@ -70,7 +71,7 @@ eq_clean_data <- function (data) {
 #'
 #' @examples
 #' \dontrun{
-#' eq_clean_data(eq_get_data("data/signif.txt.tsv"))
+#' eq_clean_data(eq_get_data("inst/extdata/signif.txt.tsv"))
 #' }
 #'
 #' @export

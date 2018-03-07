@@ -23,7 +23,7 @@ which was placed in a dataframe by function \code{eq_get_data}. The cleanup cons
 }
 \examples{
 \dontrun{
-data <- readr::read_delim("data/signif.txt.tsv", delim = "\\t")
+data <- readr::read.delim("inst/extdata/signif.txt.tsv", delim = "\\t")
 eq_clean_data(data)
 }
 
