@@ -1,5 +1,5 @@
-getwd()
-rawdata <- eq_get_data("inst/extdata/signif.txt.tsv")
+inputfile <- system.file("extdata/signif.txt.tsv", package = "FinalAssignmentR")
+rawdata <- eq_get_data(inputfile)
 data <- eq_clean_data(rawdata)
 
 #Test cleaning  

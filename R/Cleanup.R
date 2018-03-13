@@ -6,12 +6,12 @@
 #'
 #' @return This function returns the input data in a dataframe table
 #'
-#' @importFrom utils read.delim
+#' @importFrom readr read_delim
 #'
 #' @examples
 #' \dontrun{
 #'
-#' eq_get_data("inst/extdata/signif.txt.tsv")
+#' eq_get_data("extdata/signif.txt.tsv")
 #' }
 #'
 #' @export
@@ -19,7 +19,7 @@
 eq_get_data <- function (datafile) {
 
   #Read the file delimited by tabs
-  read.delim(datafile,sep="\t",header = TRUE)
+  readr::read_delim(datafile,delim="\t")
 
 }
 
@@ -40,7 +40,7 @@ eq_get_data <- function (datafile) {
 #'
 #' @examples
 #' \dontrun{
-#' data <- readr::read.delim("inst/extdata/signif.txt.tsv", delim = "\t")
+#' data <- readr::read_delim("inst/extdata/signif.txt.tsv", delim = "\t")
 #' eq_clean_data(data)
 #' }
 #'

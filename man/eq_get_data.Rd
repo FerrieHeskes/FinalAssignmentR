@@ -18,7 +18,7 @@ This function reads a datafile delimited by tabs
 \examples{
 \dontrun{
 
-eq_get_data("inst/extdata/signif.txt.tsv")
+eq_get_data("extdata/signif.txt.tsv")
 }
 
 }
